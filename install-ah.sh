@@ -27,9 +27,9 @@ mkdir -p /var/log/atomhopper
 chown -R tomcat:tomcat /etc/atomhopper /opt/atomhopper /var/log/atomhopper
 
 # copy config files
-cp ~/context.xml /etc/atomhopper/
-cp ~/log4j.properties /etc/atomhopper/
-cp ~/application-context.xml /etc/atomhopper/
+cp ./context.xml /etc/atomhopper/
+cp ./log4j.properties /etc/atomhopper/
+cp ./application-context.xml /etc/atomhopper/
 ./conf-ah.sh h2
 
 # start up
