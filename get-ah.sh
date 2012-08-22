@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -e .git ]; then
-  git pull origin origin master
+  git pull origin master
 else
   git clone https://github.com/rich4632/atom-hopper-setup.git .
 fi
