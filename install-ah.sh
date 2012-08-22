@@ -7,7 +7,7 @@
 # this is all run as root
 
 function log {
-  echo '[' `date` '] ' $1 >> setup-ah.log
+  echo '[' `date` '] ' $1 >> install-ah.log
 }
 
 source ./ah-vars.sh "$*"
