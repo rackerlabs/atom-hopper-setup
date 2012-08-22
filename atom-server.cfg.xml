@@ -21,8 +21,8 @@ NOTE: Place this file in the following folder: /etc/atomhopper/atom-server.cfg.x
         <categories-descriptor reference="workspace-categories-descriptor" />
         
         <feed title="Testing Feed" resource="/feed">
-            <feed-source reference="${backend}-feed-source" />            
-            <publisher reference="${backend}-feed-publisher" />
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher" />
         </feed>
     </workspace>  
 
@@ -30,12 +30,12 @@ NOTE: Place this file in the following folder: /etc/atomhopper/atom-server.cfg.x
         <categories-descriptor reference="workspace-categories-descriptor" />
         
         <feed title="FeedA" resource="/feedA">
-            <feed-source reference="${backend}-feed-source" />            
-            <publisher reference="${backend}-feed-publisher" />
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher" />
         </feed>
         <feed title="FeedB" resource="/feedB">
-            <feed-source reference="${backend}-feed-source" />            
-            <publisher reference="${backend}-feed-publisher" />
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher" />
         </feed>
     </workspace>  
 
@@ -43,12 +43,12 @@ NOTE: Place this file in the following folder: /etc/atomhopper/atom-server.cfg.x
         <categories-descriptor reference="workspace-categories-descriptor" />
         
         <feed title="FeedA" resource="/feedA">
-            <feed-source reference="${backend}-feed-source" />            
-            <publisher reference="${backend}-feed-publisher" />
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher" />
         </feed>
         <feed title="FeedB" resource="/feedB">
-            <feed-source reference="${backend}-feed-source" />            
-            <publisher reference="${backend}-feed-publisher" />
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher" />
         </feed>
     </workspace>  
 
@@ -56,8 +56,8 @@ NOTE: Place this file in the following folder: /etc/atomhopper/atom-server.cfg.x
         <categories-descriptor reference="workspace-categories-descriptor" />
         
         <feed title="Testing Feed" resource="/feed">
-            <feed-source reference="${backend}-feed-source" />            
-            <publisher reference="${backend}-feed-publisher" />
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher" />
         </feed>
     </workspace>  
 
@@ -65,8 +65,8 @@ NOTE: Place this file in the following folder: /etc/atomhopper/atom-server.cfg.x
         <categories-descriptor reference="workspace-categories-descriptor" />
         
         <feed title="Testing Feed" resource="/feed">
-            <feed-source reference="${backend}-feed-source" />            
-            <publisher reference="${backend}-feed-publisher" />
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher" />
         </feed>
     </workspace>  
 

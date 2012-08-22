@@ -23,15 +23,9 @@ fi
 
 if [ "$REPLACE" != "" ]
 then
-  mv atom-server.cfg.xml.template atom-server.cfg.xml.template.2
-  cat atom-server.cfg.xml.template.2 | sed "s/\${hostname}/$REPLACE/g" > atom-server.cfg.xml.template
-  rm atom-server.cfg.xml.template.2
+  mv atom-server.cfg.xml atom-server.cfg.xml.2
+  cat atom-server.cfg.xml.2 | sed "s/\${hostname}/$REPLACE/g" > atom-server.cfg.xml
+  rm atom-server.cfg.xml.2
 fi
 
-if [ "$1" != "no-domain" ]
-then
-  cat atom-server.cfg.xml.template | sed 's/\${backend}/h2/g' > atom-server.cfg.xml.h2
-  cat atom-server.cfg.xml.template | sed 's/\${backend}/mongo/g' > atom-server.cfg.xml.mongo
-  cat atom-server.cfg.xml.template | sed 's/\${backend}/postgresql/g' > atom-server.cfg.xml.postgresql
-fi
 
