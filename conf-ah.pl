@@ -118,54 +118,18 @@ sub process_doc {
   }
 }
 
-process_doc($configset->documentElement());
+print "Configuring for \"$config\" config-set\n";
 
-__END__
-
-my $context = "configs/$config";
-my $path = $folder->{'path'};
-
-for $file ( $folder->{'files'} ) {
-
-  my $src = $file->{'src'};
-  my $dest = $file->{'dest'} || $src;
-
-  # copy the file
-    CopyFile("$context/$src", "$path/$dest");
+if (not $no_restart_tomcat) {
+  print `service tomcat7 stop`;
 }
 
-__END__
+process_doc($configset->documentElement());
 
-if [ "$1" == "h2" ]
-then
-  BACKEND=$1
-elif [ "$1" == "mongo" ]
-then
-  BACKEND=$1
-elif [ "$1" == "postgresql" ]
-then
-  BACKEND=$1
-else
-  BACKEND=
-fi
+if (not $no_restart_tomcat) {
+  print `service tomcat7 start`;
+}
 
-if [ "$BACKEND" != "" ]; then
-  echo "Configuring for $config->{'name'} config-set"
 
-  if [ "$2" != "no-restart-tomcat" ] ; then
-    service tomcat7 stop
-  fi
 
-  cp -f ./application-context.xml.$BACKEND /etc/atomhopper/application-context.xml
 
-  if [ "$2" != "no-restart-tomcat" ] ; then
-    service tomcat7 start
-  fi
-
-else
-  echo 'Usage:'
-  BASENAME=`basename $0`
-  echo "    $BASENAME {h2|postgresql|mongo} [no-restart-tomcat]"
-  echo ''
-  exit
-fi
