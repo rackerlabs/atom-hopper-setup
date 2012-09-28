@@ -7,8 +7,8 @@ else
   cd atom-hopper-setup
 fi
 
-chmod u+x *.sh
-chmod u+x setup*/*.sh
+#chmod u+x *.sh
+#chmod u+x setup*/*.sh
 
 if [ "$1" == "hostname" ]
 then
