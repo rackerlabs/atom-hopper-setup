@@ -15,15 +15,21 @@ fi
 
 if [ "$BACKEND" != "" ]; then
   echo "Configuring for $BACKEND back-end"
-  service tomcat7 stop
 
-  cp -f ./atom-server.cfg.xml.$BACKEND /etc/atomhopper/atom-server.cfg.xml
+  if [ "$2" != "no-restart-tomcat" ] ; then
+    service tomcat7 stop
+  fi
 
-  service tomcat7 start
+  cp -f ./application-context.xml.$BACKEND /etc/atomhopper/application-context.xml
+
+  if [ "$2" != "no-restart-tomcat" ] ; then
+    service tomcat7 start
+  fi
+
 else
   echo 'Usage:'
   BASENAME=`basename $0`
-  echo "    $BASENAME {h2|postgresql|mongo}"
+  echo "    $BASENAME {h2|postgresql|mongo} [no-restart-tomcat]"
   echo ''
   exit
 fi
