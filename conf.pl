@@ -96,6 +96,23 @@ if ($config =~ /^\w+$/) {
 
 # NOTE: this doesn't allow src to be a URI
 
+sub copy_and_apply_params {
+
+  my $src_filename = shift or die "No source filename given";
+  my $dest_filename = shift or die "No destination filename given";
+  my %params = @_;
+
+  open FILE, $src_filename or die "Can't open \"$src_filename\": $!";
+  my $content = join'',(<FILE>);
+  close FILE;
+
+  open FILE, ">$dest_filename" or die "Can't open \"$dest_filename\": $!";
+  $content =~ s/\$\{([\w\d\-\_\.]+)\}/(exists $params{$1} ? $params{$1} : "\$\{$1\}")/eg;
+  print FILE $content;
+  close FILE;
+
+}
+
 sub process_doc {
   my $doc = shift;
   my @paths = ();
@@ -117,8 +134,11 @@ sub process_doc {
       my $src2 = File::Spec->catfile($context, $src);
       my $dest2 = File::Spec->catfile($path, $dest);
 
-      print "Copy from \"$src2\" to \"$dest2\"\n";
-      copy($src2, $dest2) or die "ERROR: $!";
+      print "Copy from \"$src2\" to \"$dest2\"";
+      if (keys %params > 0) { print ", applying config parameters"; }
+      print "\n";
+      copy_and_apply_params($src2, $dest2, %params);
+      #copy($src2, $dest2) or die "ERROR: $!";
 
     }
     pop @paths;
