@@ -10,6 +10,17 @@ fi
 #chmod u+x *.sh
 #chmod u+x setup*/*.sh
 
+if [ "$1" == "checkout" ]
+then
+  shift
+  BRANCH=$1
+  shift
+else
+  BRANCH=master
+fi
+
+git checkout $BRANCH
+
 if [ "$1" == "hostname" ]
 then
   export REPLACE=$HOSTNAME
