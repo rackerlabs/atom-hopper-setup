@@ -9,21 +9,26 @@ use File::Copy;
 
 my $no_restart_tomcat = '';
 my $help = '';
+my %params = ();
 
 GetOptions(
   'no-restart-tomcat' => \$no_restart_tomcat,
   'help' => \$help,
+  'param=s' => \%params,
   );
 
 sub print_usage {
 
   print STDERR "Usage:\n";
-  print STDERR "  $0 [options] <config-set name>\n";
+  print STDERR "  $0 [options] <config-set>\n";
 #  print STDERR "  $0 [options] <config-set URI>\n";
   print STDERR "\n";
+  print STDERR "  config-set:                The name of the config set to apply\n";
+  print STDERR "\n";
   print STDERR "  options:\n";
-  print STDERR "    --help,              This text\n";
-  print STDERR "    --no-restart-tomcat  Don't shut down Tomcat before copying config files, and don't restart Tomcat after copying the files\n";
+  print STDERR "    --help,                  This text\n";
+  print STDERR "    --no-restart-tomcat      Don't shut down Tomcat before copying config files, and don't start Tomcat after copying the files\n";
+  print STDERR "    --param <name>=<value>   Set a config parameter with name <name> to <value>\n";
   print STDERR "\n";
 }
 
