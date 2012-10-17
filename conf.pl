@@ -5,6 +5,7 @@ use LWP::Simple;
 use XML::LibXML;
 use Getopt::Long;
 use File::Spec;
+use File::Copy;
 
 my $no_restart_tomcat = '';
 my $help = '';
@@ -112,6 +113,7 @@ sub process_doc {
       my $dest2 = File::Spec->catfile($path, $dest);
 
       print "Copy from \"$src2\" to \"$dest2\"\n";
+      copy($src2, $dest2) or die "ERROR: $!";
 
     }
     pop @paths;
