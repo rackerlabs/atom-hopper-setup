@@ -135,7 +135,7 @@ cp ./context.xml /etc/atomhopper/
 cp ./log4j.properties /etc/atomhopper/
 cp ./application-context.xml /etc/atomhopper/
 
-./conf-ah.sh $CONF no-restart-tomcat
+./conf.pl $CONF --no-restart-tomcat
 
 # start up
 if [ "$SRC" != "jetty" ]; then
