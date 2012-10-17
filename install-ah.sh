@@ -135,7 +135,7 @@ cp ./context.xml /etc/atomhopper/
 cp ./log4j.properties /etc/atomhopper/
 cp ./application-context.xml /etc/atomhopper/
 
-./conf.pl $CONF --no-restart-tomcat
+./conf.pl $CONF --no-restart-tomcat --param hostname=`./calc-ip.sh`
 
 # start up
 if [ "$SRC" != "jetty" ]; then
