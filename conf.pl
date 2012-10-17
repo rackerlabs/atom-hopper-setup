@@ -107,7 +107,7 @@ sub copy_and_apply_params {
   close FILE;
 
   open FILE, ">$dest_filename" or die "Can't open \"$dest_filename\": $!";
-  $content =~ s/\$\{([\w\d\-\_\.]+)\}/(exists $params{$1} ? $params{$1} : "\$\{$1\}")/eg;
+  $content =~ s/\$\{([\w\d\-\_\.]+)\}/if (exists $params{$1}) { $params{$1} } else { warn "Warning: parameter \"$1\" not substituted"; "\$\{$1\}" }/eg;
   print FILE $content;
   close FILE;
 
