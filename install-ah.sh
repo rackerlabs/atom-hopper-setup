@@ -24,6 +24,7 @@ function print_usage {
   echo "    h2         - configure to use the h2 backend on the local filesystem" 1>&2
   echo "    postgresql - configure to use the postgresql backend installed on localhost" 1>&2
   echo "    mongo      - configure to use the mongo backend installed on localhost" 1>&2
+  echo "    customjdbc - configure to use the custom postgres-specific JDBc adapter on localhost" 1>&2
   echo "" 1>&2
 }
 
@@ -50,6 +51,8 @@ do
     CONF=postgresql
   elif [ "$arg" == "mongo" ]; then
     CONF=mongo
+  elif [ "$arg" == "customjdbc" ]; then
+    CONF=customjdbc
   else
     echo "Unknown arg \"$arg\""
     print_usage
