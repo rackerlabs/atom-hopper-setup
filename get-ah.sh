@@ -7,31 +7,14 @@ else
   cd atom-hopper-setup
 fi
 
-chmod u+x *.sh
-chmod u+x setup*/*.sh
-
-if [ "$1" == "hostname" ]
+if [ "$1" == "checkout" ]
 then
-  export REPLACE=$HOSTNAME
-elif [ "$1" == "no-domain" ]
-then
-  export REPLACE=
+  shift
+  BRANCH=$1
+  shift
 else
-  # use the ip address
-  export REPLACE=`/sbin/ifconfig | grep '\<inet\>' | sed -n '1p' | tr -s ' ' | cut -d ' ' -f3 | cut -d ':' -f2`
+  BRANCH=master
 fi
 
-if [ "$REPLACE" != "" ]
-then
-  mv atom-server.cfg.xml.template atom-server.cfg.xml.template.2
-  cat atom-server.cfg.xml.template.2 | sed "s/\${hostname}/$REPLACE/g" > atom-server.cfg.xml.template
-  rm atom-server.cfg.xml.template.2
-fi
-
-if [ "$1" != "no-domain" ]
-then
-  cat atom-server.cfg.xml.template | sed 's/\${backend}/h2/g' > atom-server.cfg.xml.h2
-  cat atom-server.cfg.xml.template | sed 's/\${backend}/mongo/g' > atom-server.cfg.xml.mongo
-  cat atom-server.cfg.xml.template | sed 's/\${backend}/postgresql/g' > atom-server.cfg.xml.postgresql
-fi
+git checkout $BRANCH
 
