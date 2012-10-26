@@ -6,6 +6,9 @@ use XML::LibXML;
 use Getopt::Long;
 use File::Spec;
 use File::Copy;
+use File::Basename;
+
+my $root = dirname(__FILE__);
 
 my $no_restart_tomcat = '';
 my $help = '';
@@ -66,7 +69,7 @@ if (not $config or $help) {
 my $configset = '';
 my $context = '';
 
-#if ($config =~ /^\w+\:/) {
+#if ($config =~ /^[\w-]+\:/) {
 #
 #  # uri
 #  die "Not Implemented";
@@ -75,12 +78,12 @@ my $context = '';
 #
 #} els
 
-if ($config =~ /^\w+$/) { 
+if ($config =~ /^[\w-]+$/) { 
 
   # named config set
-  if (not -d "configs/$config") { die "No config-set named \"$config\"."; }
+  if (not -d "$root/configs/$config") { die "No config-set named \"$config\"."; }
 
-  $context = "configs/$config";
+  $context = "$root/configs/$config";
   $configset = XML::LibXML->load_xml( location => "$context/.config-set.xml" );
 
 } else { 
