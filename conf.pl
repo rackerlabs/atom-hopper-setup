@@ -6,6 +6,9 @@ use XML::LibXML;
 use Getopt::Long;
 use File::Spec;
 use File::Copy;
+use File::Basename;
+
+my $root = dirname(__FILE__);
 
 my $no_restart_tomcat = '';
 my $help = '';
@@ -78,9 +81,9 @@ my $context = '';
 if ($config =~ /^[\w-]+$/) { 
 
   # named config set
-  if (not -d "configs/$config") { die "No config-set named \"$config\"."; }
+  if (not -d "$root/configs/$config") { die "No config-set named \"$config\"."; }
 
-  $context = "configs/$config";
+  $context = "$root/configs/$config";
   $configset = XML::LibXML->load_xml( location => "$context/.config-set.xml" );
 
 } else { 
