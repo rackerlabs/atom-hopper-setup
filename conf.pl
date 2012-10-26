@@ -66,7 +66,7 @@ if (not $config or $help) {
 my $configset = '';
 my $context = '';
 
-#if ($config =~ /^\w+\:/) {
+#if ($config =~ /^[\w-]+\:/) {
 #
 #  # uri
 #  die "Not Implemented";
@@ -75,7 +75,7 @@ my $context = '';
 #
 #} els
 
-if ($config =~ /^\w+$/) { 
+if ($config =~ /^[\w-]+$/) { 
 
   # named config set
   if (not -d "configs/$config") { die "No config-set named \"$config\"."; }
