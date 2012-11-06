@@ -26,11 +26,33 @@
             </map>
         </constructor-arg>
     </bean>
+
     <bean name="feed-source" class="org.atomhopper.hibernate.adapter.HibernateFeedSource">
         <property name="feedRepository" ref="feed-repository-bean" />
     </bean>
+
     <bean name="feed-publisher" class="org.atomhopper.hibernate.adapter.HibernateFeedPublisher">
         <property name="feedRepository" ref="feed-repository-bean" />
+    </bean>
+
+    <bean name="feed-publisher-allow-override-true" class="org.atomhopper.hibernate.adapter.HibernateFeedPublisher">
+        <property name="feedRepository" ref="feed-repository-bean" />
+        <property name="allowOverrideId">
+            <value>true</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <bean name="feed-publisher-allow-override-false" class="org.atomhopper.hibernate.adapter.HibernateFeedPublisher">
+        <property name="feedRepository" ref="feed-repository-bean" />
+        <property name="allowOverrideId">
+            <value>false</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>false</value>
+        </property>
     </bean>
 
 </beans>
