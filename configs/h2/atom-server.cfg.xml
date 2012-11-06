@@ -70,5 +70,19 @@ NOTE: Place this file in the following folder: /etc/atomhopper/atom-server.cfg.x
         </feed>
     </workspace>  
 
+    <workspace title="Testing Namespace for overrides" resource="/allow-override/">
+        <categories-descriptor reference="workspace-categories-descriptor" />
+        
+        <feed title="Testing override true feed" resource="/true">
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher-allow-override-true" />
+        </feed>
+
+        <feed title="Testing override false feed" resource="/false">
+            <feed-source reference="feed-source" />            
+            <publisher reference="feed-publisher-allow-override-false" />
+        </feed>
+    </workspace> 
+
 </atom-hopper-config>
 
