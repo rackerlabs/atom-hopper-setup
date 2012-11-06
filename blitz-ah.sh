@@ -11,7 +11,7 @@ rm -f /opt/atomhopper/*
 MONGO=`which mongo 2>/dev/null`
 if [[ "$MONGO" != "" && -x "$MONGO" ]]
 then
-  mongo atomhopper --eval 'db.persistedentry.remove()'
+  mongo atomhopper --eval 'db.dropDatabase()'
 else
   echo no mongo
 fi
