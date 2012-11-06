@@ -17,9 +17,31 @@
         <constructor-arg ref="mongo"/>
         <constructor-arg name="databaseName" value="atomhopper"/>
     </bean>
+
     <bean name="feed-publisher" class="org.atomhopper.mongodb.adapter.MongodbFeedPublisher">
         <property name="mongoTemplate" ref="mongoTemplate" />
     </bean>
+
+    <bean name="feed-publisher-allow-override-true" class="org.atomhopper.mongodb.adapter.MongodbFeedPublisher">
+        <property name="mongoTemplate" ref="mongoTemplate" />
+        <property name="allowOverrideId">
+            <value>true</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <bean name="feed-publisher-allow-override-false" class="org.atomhopper.mongodb.adapter.MongodbFeedPublisher">
+        <property name="mongoTemplate" ref="mongoTemplate" />
+        <property name="allowOverrideId">
+            <value>false</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>false</value>
+        </property>
+    </bean>
+
     <bean name="feed-source" class="org.atomhopper.mongodb.adapter.MongodbFeedSource">
         <property name="mongoTemplate" ref="mongoTemplate" />
     </bean>
