@@ -20,6 +20,24 @@ GetOptions(
   'param=s' => \%params,
   );
 
+sub get_config_sets {
+
+  opendir DIR, "$root/configs" or die "Can't open directory \"$root/configs\": $!";
+
+  my @config_sets = ();
+
+  for my $f (readdir DIR) {
+    next if (not -d "$root/configs/$f");
+    next if ($f eq '.' or $f eq '..');
+    next if (not -e "$root/configs/$f/.config-set.xml");
+    push @config_sets, $f;
+  }
+
+  close DIR;
+
+  return @config_sets;
+}
+
 sub print_usage {
 
   print STDERR "Usage:\n";
@@ -32,6 +50,9 @@ sub print_usage {
   print STDERR "    --help,                  This text\n";
   print STDERR "    --no-restart-tomcat      Don't shut down Tomcat before copying config files, and don't start Tomcat after copying the files\n";
   print STDERR "    --param <name>=<value>   Set a config parameter with name <name> to <value>\n";
+  print STDERR "\n";
+  print STDERR "The available config-sets are:\n";
+  print STDERR (map { "  $_\n" } get_config_sets());
   print STDERR "\n";
 }
 
@@ -81,7 +102,14 @@ my $context = '';
 if ($config =~ /^[\w-]+$/) { 
 
   # named config set
-  if (not -d "$root/configs/$config") { die "No config-set named \"$config\"."; }
+  if (not -d "$root/configs/$config") { 
+    print STDERR "No config-set named \"$config\".\n"; 
+    print STDERR "\n";
+    print STDERR "The available config-sets are:\n";
+    print STDERR (map { "  $_\n" } get_config_sets());
+    print STDERR "\n";
+    exit;
+  }
 
   $context = "$root/configs/$config";
   $configset = XML::LibXML->load_xml( location => "$context/.config-set.xml" );
