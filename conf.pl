@@ -35,7 +35,7 @@ sub get_config_sets {
 
   close DIR;
 
-  return @config_sets;
+  return sort @config_sets;
 }
 
 sub print_usage {
