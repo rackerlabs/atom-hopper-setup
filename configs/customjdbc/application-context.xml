@@ -29,12 +29,6 @@
 
     <bean name="feed-publisher" class="org.atomhopper.postgres.adapter.PostgresFeedPublisher">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
-        <property name="allowOverrideId">
-            <value>true</value>
-        </property>
-        <property name="allowOverrideDate">
-            <value>true</value>
-        </property>
     </bean>
 
     <bean name="feed-publisher-allow-override-true" class="org.atomhopper.postgres.adapter.PostgresFeedPublisher">
