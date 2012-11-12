@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation=
+          "http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
+
+    <!-- Custom JDBC -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/atomhoppernew" />
+        <property name="username" value="atomschema" />
+        <property name="password" value="password" />
+        <property name="minIdle" value="10" />
+        <property name="maxIdle" value="25" />
+        <property name="initialSize" value="10" />
+        <property name="maxActive" value="50" />
+    </bean>
+
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean name="customjdbc-feed-publisher" class="org.atomhopper.postgres.adapter.PostgresFeedPublisher">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+        <property name="allowOverrideId">
+            <value>true</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <bean name="customjdbc-feed-source" class="org.atomhopper.postgres.adapter.PostgresFeedSource">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />  
+    </bean>
+
+    <!-- Postgresql -->
+    <bean name="postgresql-feed-repository-bean" class="org.atomhopper.hibernate.HibernateFeedRepository">
+        <constructor-arg>
+            <map>
+                <entry key="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+                <entry key="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/atomhopper" />
+                <entry key="hibernate.connection.username" value="postgres" />
+                <entry key="hibernate.connection.password" value="password" />
+
+                <entry key="hibernate.hbm2ddl.auto" value="update" />
+                <!-- <entry key="hibernate.show_sql" value="false" /> -->
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean name="postgresql-feed-source" class="org.atomhopper.hibernate.adapter.HibernateFeedSource">
+        <property name="feedRepository" ref="postgresql-feed-repository-bean" />
+    </bean>
+    <bean name="postgresql-feed-publisher" class="org.atomhopper.hibernate.adapter.HibernateFeedPublisher">
+        <property name="feedRepository" ref="postgresql-feed-repository-bean" />
+        <property name="allowOverrideId">
+            <value>true</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <!-- Migration -->
+    <bean name="feed-publisher" class="org.atomhopper.migration.adapter.MigrationFeedPublisher">
+        <property name="oldFeedPublisher" ref="postgresql-feed-publisher" />
+        <property name="newFeedPublisher" ref="customjdbc-feed-publisher" />
+        <property name="writeTo">
+            <value>BOTH</value>
+        </property>
+        <property name="readFrom">
+            <value>NEW</value>
+        </property>
+    </bean>
+
+    <bean name="feed-source" class="org.atomhopper.migration.adapter.MigrationFeedSource">
+        <property name="oldFeedSource" ref="postgresql-feed-source" />
+        <property name="newFeedSource" ref="customjdbc-feed-source" />
+        <property name="readFrom">
+            <value>NEW</value>
+        </property>
+    </bean>
+
+    <!-- Migration with overrides -->
+    <bean name="feed-publisher-allow-override-true" class="org.atomhopper.migration.adapter.MigrationFeedPublisher">
+        <property name="oldFeedPublisher" ref="postgresql-feed-publisher" />
+        <property name="newFeedPublisher" ref="customjdbc-feed-publisher" />
+        <property name="writeTo">
+            <value>BOTH</value>
+        </property>
+        <property name="readFrom">
+            <value>NEW</value>
+        </property>
+        <property name="allowOverrideId">
+            <value>true</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <bean name="feed-publisher-allow-override-false" class="org.atomhopper.migration.adapter.MigrationFeedPublisher">
+        <property name="oldFeedPublisher" ref="postgresql-feed-publisher" />
+        <property name="newFeedPublisher" ref="customjdbc-feed-publisher" />
+        <property name="writeTo">
+            <value>BOTH</value>
+        </property>
+        <property name="readFrom">
+            <value>NEW</value>
+        </property>
+        <property name="allowOverrideId">
+            <value>false</value>
+        </property>
+        <property name="allowOverrideDate">
+            <value>false</value>
+        </property>
+    </bean>
+
+</beans>
