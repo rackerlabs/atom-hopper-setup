@@ -1,0 +1,8 @@
+<config-set>
+  <folder path="/etc/atomhopper">
+    <file src="application-context.xml" />
+    <file src="atom-server.cfg.xml" />
+    <file src="context.xml" />
+    <file src="log4j.properties" />
+  </folder>
+</config-set>
