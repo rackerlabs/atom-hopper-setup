@@ -10,7 +10,6 @@ function log {
 
 SRC=war
 CONF=h2
-AH_ARTIFACT_URL=xx
 
 command_name=$0
 function print_usage {
@@ -32,7 +31,7 @@ if [ "$1" == "--help" ]; then
   print_usage
   exit 0
 else
-  AH_ARTIFACT_URL="$1"
+  AH_FILE="$1"
 fi
 
 if [ "$2" == "h2" ]; then
@@ -45,11 +44,7 @@ elif [ "$2" == "customjdbc" ]; then
   CONF=customjdbc
 fi
 
-AH_USER="$3"
-AH_PASSWORD="$4"
-
 ### calculate variables and urls
-source ./ah-vars-2.sh $AH_ARTIFACT_URL
 source ./catalina-vars.sh
 
 ### log the setup attempt
@@ -71,17 +66,10 @@ yum erase -y -q atomhopper.noarch
 rm -rf $CATALINA_HOME/webapps/ROOT.war
 rm -rf $CATALINA_HOME/webapps/ROOT
 
-# remove any jetty files
-#
-
 # delete left-over config files
 rm -rf /etc/atomhopper
 rm -rf /opt/atomhopper
 rm -rf /var/log/atomhopper
-
-rm -rf $AH_FILE
-
-wget -v --no-check-certificate --http-user=$AH_USER --http-password=$AH_PASSWORD $AH_ARTIFACT_URL
 
 mkdir -p /etc/atomhopper
 mkdir -p /opt/atomhopper
