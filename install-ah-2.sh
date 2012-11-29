@@ -45,6 +45,8 @@ elif [ "$2" == "customjdbc" ]; then
   CONF=customjdbc
 fi
 
+AH_USER="$3"
+AH_PASSWORD="$4"
 
 ### calculate variables and urls
 source ./ah-vars-2.sh $AH_ARTIFACT_URL
@@ -79,7 +81,7 @@ rm -rf /var/log/atomhopper
 
 rm -rf $AH_FILE
 
-wget -v --no-check-certificate $AH_ARTIFACT_URL
+wget -v --no-check-certificate --http-user=$AH_USER --http-password=$AH_PASSWORD $AH_ARTIFACT_URL
 
 mkdir -p /etc/atomhopper
 mkdir -p /opt/atomhopper
