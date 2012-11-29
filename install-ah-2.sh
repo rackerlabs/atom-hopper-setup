@@ -13,13 +13,8 @@ CONF=h2
 
 command_name=$0
 function print_usage {
-  echo "Usage: " `basename $command_name` "[ARG]..." 1>&2
-  echo "where ARG can be zero or more of the following:" 1>&2
-  echo "    release    - install the latest release build" 1>&2
-  echo "    snapshot   - install the latests snapshot build" 1>&2
-  echo "    war        - install by copying the WAR file into tomcat's webapps folder as ROOT.war" 1>&2
-  echo "    rpm        - install by running the RPM file via yum" 1>&2
-  echo "    jetty      - install by running the embedded Jetty JAR file as a background process" 1>&2
+  echo "Usage: " `basename $command_name` "[WAR_FILE] [ARG]..." 1>&2
+  echo "where ARG can be one of the following:" 1>&2
   echo "    h2         - configure to use the h2 backend on the local filesystem" 1>&2
   echo "    postgresql - configure to use the postgresql backend installed on localhost" 1>&2
   echo "    mongo      - configure to use the mongo backend installed on localhost" 1>&2
