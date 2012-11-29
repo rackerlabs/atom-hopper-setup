@@ -79,7 +79,7 @@ rm -rf /var/log/atomhopper
 
 rm -rf $AH_FILE
 
-wget -q $AH_ARTIFACT_URL
+wget -v $AH_ARTIFACT_URL
 
 mkdir -p /etc/atomhopper
 mkdir -p /opt/atomhopper
