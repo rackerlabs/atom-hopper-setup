@@ -32,7 +32,7 @@ if [ "$1" == "--help" ]; then
   print_usage
   exit 0
 else
-  AH_ARTIFACT_URL=https://jenkins.inova.dfw1.ci.rackspace.net/job/ah-reg/ws/copied-tmp/atomhopper/target/atomhopper-1.2.2-SNAPSHOT.war
+  AH_ARTIFACT_URL="$1"
 fi
 
 if [ "$2" == "h2" ]; then
