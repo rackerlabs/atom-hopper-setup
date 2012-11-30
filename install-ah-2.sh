@@ -81,7 +81,7 @@ chmod 755 /opt/atomhopper
 ./conf.pl $CONF --no-restart-tomcat --param hostname=`./calc-ip.sh`
 
 # start up
-java -jar $AH_FILE start &>/var/log/atomhopper/jetty.log &
+service tomcat7 start
 
 sleep 3
 curl -s localhost:8080/namespace/feed
