@@ -20,7 +20,8 @@ PSQL=`which psql 2>/dev/null`
 if [[ "$PSQL" != "" && -x "$PSQL" ]]
 then
   psql -c 'delete from entries; delete from categoryentryreferences; delete from categories; delete from feeds;' atomhopper postgres
-  psql -c 'delete from entries;' atomhoppernew atomhoppernew2 postgres
+  psql -c 'delete from entries;' atomhoppernew postgres
+  psql -c 'delete from entries;' atomhoppernew2 postgres
 else
   echo no psql
 fi
