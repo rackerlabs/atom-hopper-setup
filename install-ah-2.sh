@@ -43,7 +43,7 @@ fi
 source ./catalina-vars.sh
 
 ### log the setup attempt
-log "install-ah.sh - SRC=$SRC, CONF=$CONF, AH_ARTIFACT_URL=$AH_ARTIFACT_URL"
+log "install-ah-2.sh - SRC=$SRC, CONF=$CONF, AH_FILE=$AH_FILE"
 
 service tomcat7 stop
 java -jar jetty-killer.jar &>/dev/null    # shutdown any ah jetty
