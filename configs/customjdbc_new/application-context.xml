@@ -14,7 +14,7 @@
     <!-- Custom JDBC -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/atomhoppernew" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/atomhoppernew2" />
         <property name="username" value="atomschema" />
         <property name="password" value="password" />
         <property name="minIdle" value="10" />
@@ -27,11 +27,11 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean name="feed-publisher" class="org.atomhopper.postgres.adapter.PostgresFeedPublisher">
+    <bean name="feed-publisher" class="org.atomhopper.jdbc.adapter.JdbcFeedPublisher">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
 
-    <bean name="feed-publisher-allow-override-true" class="org.atomhopper.postgres.adapter.PostgresFeedPublisher">
+    <bean name="feed-publisher-allow-override-true" class="org.atomhopper.jdbc.adapter.JdbcFeedPublisher">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
         <property name="allowOverrideId">
             <value>true</value>
@@ -41,7 +41,7 @@
         </property>
     </bean>
 
-    <bean name="feed-publisher-allow-override-false" class="org.atomhopper.postgres.adapter.PostgresFeedPublisher">
+    <bean name="feed-publisher-allow-override-false" class="org.atomhopper.jdbc.adapter.JdbcFeedPublisher">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
         <property name="allowOverrideId">
             <value>false</value>
@@ -51,7 +51,7 @@
         </property>
     </bean>
 
-    <bean name="feed-source" class="org.atomhopper.postgres.adapter.PostgresFeedSource">
+    <bean name="feed-source" class="org.atomhopper.jdbc.adapter.JdbcFeedSource">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
 </beans>
