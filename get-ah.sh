@@ -11,7 +11,7 @@ elif [ -e atom-hopper-setup ]; then
     exit 1
   fi
 else
-  git clone https://github.com/rackspace/atom-hopper-setup.git 
+  git clone https://github.com/rackerlabs/atom-hopper-setup.git 
   cd atom-hopper-setup
 fi
 
