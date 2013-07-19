@@ -12,7 +12,7 @@
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <!-- Custom JDBC -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
         <property name="driverClassName" value="org.postgresql.Driver" />
         <property name="url" value="jdbc:postgresql://localhost:5432/atomhoppernew" />
         <property name="username" value="atomschema" />
