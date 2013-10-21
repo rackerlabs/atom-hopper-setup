@@ -54,4 +54,8 @@
     <bean name="feed-source" class="org.atomhopper.jdbc.adapter.JdbcFeedSource">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
+
+    <bean name="archive-feed-source" class="org.atomhopper.jdbc.adapter.JdbcFeedSource">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
 </beans>
