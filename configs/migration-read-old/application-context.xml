@@ -41,6 +41,10 @@
         <property name="jdbcTemplate" ref="jdbcTemplate" />  
     </bean>
 
+    <bean name="archive-customjdbc-feed-source" class="org.atomhopper.postgres.adapter.PostgresFeedSource">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />  
+    </bean>
+
     <!-- Postgresql -->
     <bean name="postgresql-feed-repository-bean" class="org.atomhopper.hibernate.HibernateFeedRepository">
         <constructor-arg>
@@ -59,6 +63,11 @@
     <bean name="postgresql-feed-source" class="org.atomhopper.hibernate.adapter.HibernateFeedSource">
         <property name="feedRepository" ref="postgresql-feed-repository-bean" />
     </bean>
+
+    <bean name="archive-postgresql-feed-source" class="org.atomhopper.hibernate.adapter.HibernateFeedSource">
+        <property name="feedRepository" ref="postgresql-feed-repository-bean" />
+    </bean>
+
     <bean name="postgresql-feed-publisher" class="org.atomhopper.hibernate.adapter.HibernateFeedPublisher">
         <property name="feedRepository" ref="postgresql-feed-repository-bean" />
         <property name="allowOverrideId">
@@ -84,6 +93,14 @@
     <bean name="feed-source" class="org.atomhopper.migration.adapter.MigrationFeedSource">
         <property name="oldFeedSource" ref="postgresql-feed-source" />
         <property name="newFeedSource" ref="customjdbc-feed-source" />
+        <property name="readFrom">
+            <value>OLD</value>
+        </property>
+    </bean>
+
+    <bean name="archive-feed-source" class="org.atomhopper.migration.adapter.MigrationFeedSource">
+        <property name="oldFeedSource" ref="archive-postgresql-feed-source" />
+        <property name="newFeedSource" ref="archive-customjdbc-feed-source" />
         <property name="readFrom">
             <value>OLD</value>
         </property>

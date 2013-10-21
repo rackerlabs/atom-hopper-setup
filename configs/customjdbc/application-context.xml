@@ -54,4 +54,8 @@
     <bean name="feed-source" class="org.atomhopper.postgres.adapter.PostgresFeedSource">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
+
+    <bean name="archive-feed-source" class="org.atomhopper.postgres.adapter.PostgresFeedSource">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
 </beans>
