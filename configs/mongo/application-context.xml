@@ -45,5 +45,8 @@
     <bean name="feed-source" class="org.atomhopper.mongodb.adapter.MongodbFeedSource">
         <property name="mongoTemplate" ref="mongoTemplate" />
     </bean>
-    
+
+    <bean name="archive-feed-source" class="org.atomhopper.mongodb.adapter.MongodbFeedSource">
+        <property name="mongoTemplate" ref="mongoTemplate" />
+    </bean>
 </beans>

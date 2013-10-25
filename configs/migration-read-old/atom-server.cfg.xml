@@ -67,6 +67,13 @@ NOTE: Place this file in the following folder: /etc/atomhopper/atom-server.cfg.x
         <feed title="Testing Feed" resource="/feed">
             <feed-source reference="feed-source" />            
             <publisher reference="feed-publisher" />
+	    <archive-feed href="/namespace-p/feed/archive" />
+        </feed>
+
+        <feed title="Testing Feed" resource="feed/archive" archived="true">
+            <feed-source reference="archive-feed-source" />            
+            <publisher reference="feed-publisher" />
+	    <current-feed href="/namespace-p/feed" />
         </feed>
     </workspace>  
 

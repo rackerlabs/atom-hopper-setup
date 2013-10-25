@@ -35,6 +35,10 @@
         <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
 
+    <bean name="archive-feed-source" class="org.atomhopper.postgres.adapter.PostgresFeedSource">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
     <bean name="feed-publisher-allow-override-true" class="org.atomhopper.postgres.adapter.PostgresFeedPublisher">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
         <property name="allowOverrideId">
